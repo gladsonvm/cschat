@@ -10,7 +10,7 @@ from django.utils import timezone
 # Create your models here.
 
 class UserProfile(models.Model):
-    user = models.Foreignkey(User)
+    user = models.ForeignKey(User)
     user_image = models.TextField(null=True, blank=True)
     activation_key = models.IntegerField(null=True, blank=True)
     key_expires = models.DateTimeField(null=True, blank=True)
@@ -33,8 +33,8 @@ class ClientChat(models.Model):
         duratn = (ended_at-started_at)
 
 class OperatorChat(models.Model):
-    frm_op = models.ForeignKey(UserProfile)
-    to_op = models.ForeignKey(UserProfile)
+    frm_op = models.ForeignKey(UserProfile,related_name='from_op')
+    to_op = models.ForeignKey(UserProfile,related_name='to_op')
     started_at = models.DateTimeField()
     ended_at = models.DateTimeField(null=True,blank=True)
     content = models.TextField(max_length=None)
