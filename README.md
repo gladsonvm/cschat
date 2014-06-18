@@ -7,4 +7,5 @@ Setup
 ------
 
 python manage.py syncdb
-python manage.py runserver 
+
+python manage.py runserver
