@@ -16,11 +16,15 @@ class UserProfile(models.Model):
     key_expires = models.DateTimeField(null=True, blank=True)
     dept = models.TextField(null=True, blank=True)
 
+    def __unicode__(self):
+        return self.user              
 
 class ClientProfile(models.Model):
     client = models.ForeignKey(User)
     dept = models.TextField(null=True,blank=True)
     question = models.TextField(max_length=None)
+    def __unicode__(self):
+        return self.client
 
 class ClientChat(models.Model):
     client = models.ForeignKey(ClientProfile)
@@ -29,7 +33,11 @@ class ClientChat(models.Model):
     ended_at = models.DateTimeField(null=True,blank=True)
     content = models.TextField(max_length=None)
 
+    def __unicode__(self):
+        return self.client
+
     def duration(self):
+        duratn = timedelta()
         duratn = (ended_at-started_at)
 
 class OperatorChat(models.Model):
@@ -39,6 +47,9 @@ class OperatorChat(models.Model):
     ended_at = models.DateTimeField(null=True,blank=True)
     content = models.TextField(max_length=None)
 
+    def __unicode__(self):
+        return self.to_op
+    
     def duration(self):
         duratn = (ended_at-started_at)
 
